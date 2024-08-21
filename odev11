@@ -1,0 +1,39 @@
+--1. actor ve customer tablolarındaki first_name sütunlarının tüm verilerini sıralama--
+SELECT first_name
+FROM actor
+UNION
+SELECT first_name
+FROM customer
+ORDER BY first_name;
+--2. actor ve customer tablolarında first_name sütunları için kesişen verileri sıralama--
+SELECT first_name
+FROM actor
+INTERSECT
+SELECT first_name
+FROM customer
+ORDER BY first_name;
+--3. actor tablosunda olup, customer tablosunda bulunmayan first_name verilerini sıralama--
+SELECT first_name
+FROM actor
+EXCEPT
+SELECT first_name
+FROM customer
+ORDER BY first_name;
+--4. Tekrarlayan veriler dahil edilerek actor ve customer tablolarındaki first_name sütunlarının tüm verilerini sıralama--
+SELECT first_name
+FROM actor
+UNION ALL
+SELECT first_name
+FROM customer
+ORDER BY first_name;
+--5. Tekrarlayan veriler dahil edilerek actor ve customer tablolarında first_name sütunları için kesişen verileri sıralama--
+SELECT a.first_name
+FROM actor a
+JOIN customer c ON a.first_name = c.first_name
+ORDER BY a.first_name;
+--6. Tekrarlayan veriler dahil edilerek actor tablosunda olup, customer tablosunda bulunmayan first_name verilerini sıralama--
+SELECT first_name
+FROM actor a
+LEFT JOIN customer c ON a.first_name = c.first_name
+WHERE c.first_name IS NULL
+ORDER BY a.first_name;
